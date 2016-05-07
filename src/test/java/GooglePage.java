@@ -1,24 +1,31 @@
 
+import com.sun.org.apache.xml.internal.utils.CharKey;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-public class GooglePage {
-  private WebElement q;
-  private final WebDriver webdriver;
+class GooglePage {
 
-  public GooglePage(WebDriver webdriver) {
-    this.webdriver = webdriver;
-  }
+    @FindBy(css = "#lst-ib")
+    public WebElement q;
 
-  public SearchResultsPage searchFor(String text) {
+
+    private By r=By.cssSelector("#ires .g");
+
+
+
+
+    SearchResultsPage searchFor(String text) {
     q.sendKeys(text);
-    q.submit();
-    new WebDriverWait(webdriver, 4).until(visibilityOfElementLocated(By.cssSelector("#ires .g")));
-    return PageFactory.initElements(webdriver, SearchResultsPage.class);
+        q.submit();
+      WebDriverWait a = new WebDriverWait(GoogleTest.MyDrive,4);
+      a.until(visibilityOfElementLocated(r));
+      return PageFactory.initElements(GoogleTest.MyDrive, SearchResultsPage.class);
   }
 }
