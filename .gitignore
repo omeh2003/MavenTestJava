@@ -4,7 +4,6 @@
 
 # User-specific stuff:
 .idea/tasks.xml
-.idea/dictionaries
 .idea/jsLibraryMappings.xml
 
 # Sensitive or high-churn files:
@@ -13,12 +12,8 @@
 .idea/dataSources.local.xml
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
-.idea/uiDesigner.xml
-
 # Gradle:
 .idea/gradle.xml
-.idea/libraries
-
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
 
@@ -66,8 +61,6 @@ gen### TortoiseGit template
 
 # IntelliJ project files
 gen### Java template
-*.class
-
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -84,3 +77,7 @@ hs_err_pid*
 # IntelliJ project files
 gen
 # Created by .ignore support plugin (hsz.mobi)
+pom.xml
+.gitignore
+.gitignore
+.gitignore
