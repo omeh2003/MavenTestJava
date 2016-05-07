@@ -31,14 +31,14 @@ public class GoogleTest {
     @Test
     public void userCanSearch() {
         GooglePage.GoToSearchPage();
-        GooglePage.Search("Selenide","Selenide");
+        GooglePage.Search("Selenide", "Selenide");
     }
 
     @Test
-    public void userSearch(){
+    public void userSearch() {
 
         GooglePage.GoToSearchPage();
-        GooglePage.Search("Windows","Windows");
+        GooglePage.Search("Windows", "Windows");
     }
 
 }
