@@ -77,5 +77,4 @@ hs_err_pid*
 # IntelliJ project files
 gen
 # Created by .ignore support plugin (hsz.mobi)
-pom.xml
 .gitignore
