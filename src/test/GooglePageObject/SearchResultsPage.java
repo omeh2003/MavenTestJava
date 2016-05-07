@@ -1,10 +1,9 @@
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-class SearchResultsPage {
+public class SearchResultsPage {
     @FindBy(css = "#ires .g")
     private List<WebElement> results;
 
