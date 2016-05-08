@@ -1,25 +1,26 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
+//import org.testng.annotations.AfterTest;
+//import org.testng.annotations.BeforeTest;
+
 
 public class GoogleTest {
 
+    static WebDriver MyDrive;
+    static boolean Promo;
 
-    public static WebDriver MyDrive;
 
     @BeforeTest
     public void setUp() {
 
-
+        Promo = true;
         MyDrive = new FirefoxDriver();
         MyDrive.manage().window().maximize();
 
@@ -28,16 +29,16 @@ public class GoogleTest {
     @AfterTest
     public void tearDown() {
 
-
+        if (!Promo) Promo = true;
         MyDrive.quit();
 
     }
-
 
     @Test
     // Проверка работы поиска
     public void userCanSearch() {
         GooglePage.GoToSearchPage();
+
         GooglePage.Search("Selenide", "Selenide");
     }
 
@@ -80,17 +81,11 @@ public class GoogleTest {
     // Проверка доступности GooglePlay с Главной страницы
     public void checkGooglePlay() {
         GooglePage.GoToSearchPage();
-        MyDrive.findElement(By.linkText("×")).click();
-        if (GoogleButton.ButtonGooglePlay().isDisplayed()) {
-            Assert.fail("ButtonGooglePlay isDisplayd");
-        }
-        GoogleButton.ButtonProgramm().click();
-        new WebDriverWait(GoogleTest.MyDrive, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#gb78 > span.gb_3")));
-
-        if (GoogleButton.ButtonGooglePlay().isDisplayed()) {
-            GoogleButton.ButtonGooglePlay().click();
-        }
-        new WebDriverWait(GoogleTest.MyDrive, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span.gb_Rb")));
+        GooglePage.CheckElement(GoogleButton.ButtonProgramm());
+        GooglePage.GetWebElement(GoogleButton.ButtonProgramm()).click();
+        GooglePage.CheckElement(GoogleButton.ButtonGooglePlay());
+        GooglePage.GetWebElement(GoogleButton.ButtonGooglePlay()).click();
+        GooglePage.WaitForElement(By.cssSelector("span.gb_Rb"));
         assertTrue(MyDrive.getTitle().equals("Google Play"));
     }
 }

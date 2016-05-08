@@ -1,61 +1,57 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
 /**
  * Created  on 07.05.2016.
  */
 public class GoogleButton {
-    public static GoogleButton.Selector Selector;
-    public String Name;
-    public String ButtonName;
+    public final Selector SelectorElemet;
+    public final String Name;
+    public final String ButtonName;
 
-    public GoogleButton(GoogleButton.Selector selector, String name, String buttonName) {
+    public GoogleButton(Selector selector, String name, String buttonName) {
         this.Name = name;
-        Selector = selector;
+        this.SelectorElemet = selector;
         this.ButtonName = buttonName;
     }
 
     // Кнопка "Поиск в Google"
     public static GoogleButton SearchInGoogle() {
-        return new GoogleButton(GoogleButton.Selector.CSS, "input[name=\"btnK\"]", "Поиск в Google");
+        return new GoogleButton(Selector.CSS, "input[name=\"btnK\"]", "Поиск в Google");
     }
 
     // Кнопка "Мне повезёт!"
     public static GoogleButton FeelingLucky() {
-        return new GoogleButton(GoogleButton.Selector.CSS, "input[name=\"btnI\"]", "Мне повезёт!");
+        return new GoogleButton(Selector.CSS, "input[name=\"btnI\"]", "Мне повезёт!");
     }
 
     // Кнопка "Войти!"
     public static GoogleButton LoginIn() {
-        return new GoogleButton(GoogleButton.Selector.ID, "gb_70", "Войти!");
+        return new GoogleButton(Selector.ID, "gb_70", "Войти!");
     }
 
     // Кнопка "Почта"
     public static GoogleButton Mail() {
-        return new GoogleButton(GoogleButton.Selector.CLASS, "gb_P", "Почта");
+        return new GoogleButton(Selector.CLASS, "gb_P", "Почта");
     }
 
+
     // Поле ввода поискового запроса
-    public static WebElement StringSearch() {
-        return GoogleTest.MyDrive.findElement(By.id("lst-ib"));
+    public static GoogleButton StringSearch() {
+        return new GoogleButton(Selector.ID, "lst-ib", "Поле ввода поискового запроса");
     }
 
     // Кнопка "Поиск"
-    public static WebElement ButtonOk() {
-
-        return GoogleTest.MyDrive.findElement(By.id("sblsbb"));
+    public static GoogleButton ButtonOk() {
+        return new GoogleButton(Selector.ID, "sblsbb", "Кнопка \"Поиск\"");
     }
 
-    // Кнопка "GooglePlay"
-    public static WebElement ButtonGooglePlay() {
 
-        return GoogleTest.MyDrive.findElement(By.cssSelector("#gb78 > span.gb_3"));
+    // Кнопка "GooglePlay"
+    public static GoogleButton ButtonGooglePlay() {
+        return new GoogleButton(Selector.ID, "gb78", "Кнопка \"GooglePlay\"");
     }
 
     // Кнопка "Приложения"
-    public static WebElement ButtonProgramm() {
-
-        return GoogleTest.MyDrive.findElement(By.cssSelector("a.gb_b.gb_Qb"));
+    public static GoogleButton ButtonProgramm() {
+        return new GoogleButton(Selector.ID, "gbwa", "Кнопка \"Приложения\"");
     }
 
 
