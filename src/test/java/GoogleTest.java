@@ -9,8 +9,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-//import org.testng.annotations.AfterTest;
-//import org.testng.annotations.BeforeTest;
+
 
 
 public class GoogleTest {
@@ -110,7 +109,7 @@ public class GoogleTest {
         int count = 0;
         while (GooglePage.GetWebElement(GoogleTranslete.ResultTexBox()).getText().isEmpty()) {
             Reporter.log("Ждем перевода ", true);
-            Reporter.log(new StringBuilder().append("Count: ").append(count).toString(), true);
+            Reporter.log("Count: " + count, true);
             Reporter.log(GooglePage.GetWebElement(GoogleTranslete.ResultTexBox()).getText(), true);
             Reporter.log("=======================", true);
             count++;

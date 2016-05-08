@@ -87,8 +87,6 @@ class GooglePage {
     public static boolean CheckSelector(By selector) {
         try {
 
-            String atribute = "";
-
             Reporter.log("Проверка селектора By: " + selector.toString(), true);
             WebElement w = GoogleTest.MyDrive.findElement(selector);
             Reporter.log("Проверка селектора WebElement: " + w.getText(), true);
@@ -122,7 +120,7 @@ class GooglePage {
             Reporter.log("getCssValue: " + selector.getCssValue(atribute), true);
             Reporter.log("=======================", true);
 
-            return (selector != null && selector.isEnabled());
+            return selector.isEnabled();
 
         } catch (Exception e) {
 

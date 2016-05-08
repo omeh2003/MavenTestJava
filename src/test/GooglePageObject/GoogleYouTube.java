@@ -19,8 +19,7 @@ public class GoogleYouTube {
     }
 
     public static List<WebElement> GetResult() {
-        List<WebElement> webElement = GoogleTest.MyDrive.findElements(By.className("yt-lockup-title"));
-        return webElement;
+        return GoogleTest.MyDrive.findElements(By.className("yt-lockup-title"));
 
     }
 
