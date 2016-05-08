@@ -5,4 +5,4 @@ First steps in Java Test in Selenium
 
 PageObjects - https://github.com/omeh2003/MavenTestJava/tree/master/src/test/GooglePageObject
 
-Отчет  - https://github.com/omeh2003/MavenTestJava/blob/master/Test%20Results%20-%20GoogleTest.html
+Отчет  - https://github.com/omeh2003/MavenTestJava/tree/master/TestResults-GoogleTest.html
