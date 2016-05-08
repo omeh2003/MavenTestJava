@@ -54,7 +54,19 @@ public class GoogleButton {
         return new GoogleButton(Selector.ID, "gbwa", "Кнопка \"Приложения\"");
     }
 
+    // Кнопка "Переводчик"
+    public static GoogleButton ButtonTranslate() {
+        return new GoogleButton(Selector.ID, "gb51", "Кнопка \"Переводчик\"");
+    }
+
+    // Кнопка "YouTube"
+    public static GoogleButton ButtonYouTube() {
+        return new GoogleButton(Selector.ID, "gb36", "Кнопка \"YouTube\"");
+    }
+
 
     public enum Selector {CSS, ID, XPATH, NAME, CLASS}
+
+
 }
 
