@@ -80,11 +80,11 @@ public class GoogleTest {
     // Проверка доступности GooglePlay с Главной страницы
     public void checkGooglePlay() {
         GooglePage.GoToSearchPage();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgramm());
-        GooglePage.GetWebElement(GoogleButton.ButtonProgramm()).click();
+        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgram());
+        GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonGooglePlay());
         GooglePage.GetWebElement(GoogleButton.ButtonGooglePlay()).click();
-        GooglePage.WaitForElement(By.cssSelector("span.gb_Rb"));
+        GooglePage.WaitForElement(By.cssSelector("span.gb_Rb"), 5, false);
         assertTrue(MyDrive.getTitle().equals("Google Play"));
 
 
@@ -94,8 +94,8 @@ public class GoogleTest {
     //Проверка Переводчика
     public void checkGoogleTranslate() {
         GooglePage.GoToSearchPage();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgramm());
-        GooglePage.GetWebElement(GoogleButton.ButtonProgramm()).click();
+        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgram());
+        GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonTranslate());
         GooglePage.GetWebElement(GoogleButton.ButtonTranslate()).click();
         GooglePage.WaitForElement(By.id("gbq1"));
@@ -113,7 +113,7 @@ public class GoogleTest {
             Reporter.log("=======================", true);
             count++;
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -124,7 +124,9 @@ public class GoogleTest {
         GooglePage.CheckSelector(result);
 
         assert result != null;
-        assertTrue(result.getText().startsWith("Привет Google"));
+        String s = "Привет Google";
+        s = s.toLowerCase().trim();
+        assertTrue(result.getText().toLowerCase().trim().startsWith(s), "Ждали: " + s + "Получили: " + result);
 
     }
 
@@ -132,8 +134,8 @@ public class GoogleTest {
     //Проверка Youtube
     public void checkYoutube() {
         GooglePage.GoToSearchPage();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgramm());
-        GooglePage.GetWebElement(GoogleButton.ButtonProgramm()).click();
+        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgram());
+        GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonYouTube());
         GooglePage.GetWebElement(GoogleButton.ButtonYouTube()).click();
         GooglePage.WaitForElement(By.id("logo-container"));

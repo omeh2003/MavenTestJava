@@ -43,7 +43,7 @@ class GooglePage {
 
     static void CheckGoogleButton(GoogleButton button) {
         By by = null;
-        switch (button.SelectorElemet) {
+        switch (button.SelectorElement) {
             case CSS:
                 by = By.cssSelector(button.Name);
                 break;
@@ -159,7 +159,7 @@ class GooglePage {
 
     public static WebElement GetWebElement(GoogleButton button) {
         By by = null;
-        switch (button.SelectorElemet) {
+        switch (button.SelectorElement) {
             case CSS:
                 by = By.cssSelector(button.Name);
                 break;
@@ -180,7 +180,7 @@ class GooglePage {
         try {
             Reporter.log("ButtonName: " + button.ButtonName, true);
             Reporter.log("Name: " + button.Name, true);
-            Reporter.log("SelectorElemet: " + button.SelectorElemet, true);
+            Reporter.log("SelectorElement: " + button.SelectorElement, true);
 
             WebElement webElement = driver.findElement(by);
             Reporter.log(button.Name + " - isEnabled: " + webElement.isEnabled(), true);

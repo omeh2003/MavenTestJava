@@ -2,13 +2,13 @@
  * Created  on 07.05.2016.
  */
 public class GoogleButton {
-    public final Selector SelectorElemet;
+    public final Selector SelectorElement;
     public final String Name;
     public final String ButtonName;
 
     public GoogleButton(Selector selector, String name, String buttonName) {
         this.Name = name;
-        this.SelectorElemet = selector;
+        this.SelectorElement = selector;
         this.ButtonName = buttonName;
     }
 
@@ -50,7 +50,7 @@ public class GoogleButton {
     }
 
     // Кнопка "Приложения"
-    public static GoogleButton ButtonProgramm() {
+    public static GoogleButton ButtonProgram() {
         return new GoogleButton(Selector.ID, "gbwa", "Кнопка \"Приложения\"");
     }
 
