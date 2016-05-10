@@ -93,41 +93,17 @@ public class GoogleTest {
     @Test
     //Проверка Переводчика
     public void checkGoogleTranslate() {
-        GooglePage.GoToSearchPage();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgram());
-        GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonTranslate());
-        GooglePage.GetWebElement(GoogleButton.ButtonTranslate()).click();
-        Helper.WaitForElement(By.id("gbq1"));
-        assertTrue(MyDrive.getTitle().equals("Google Переводчик"));
+        GooglePage.GoToTranslatePage();
         GooglePage.CheckGoogleButton(GoogleTranslete.SourceTexBox());
         GooglePage.GetWebElement(GoogleTranslete.SourceTexBox()).sendKeys("Hi Google");
         GooglePage.CheckGoogleButton(GoogleTranslete.ButtonTranslete());
         GooglePage.GetWebElement(GoogleTranslete.ButtonTranslete()).click();
         GooglePage.CheckGoogleButton(GoogleTranslete.ResultTexBox());
-        int count = 0;
-        while (GooglePage.GetWebElement(GoogleTranslete.ResultTexBox()).getText().isEmpty()) {
-            Reporter.log("Ждем перевода ", true);
-            Reporter.log("Count: " + count, true);
-            Reporter.log(GooglePage.GetWebElement(GoogleTranslete.ResultTexBox()).getText(), true);
-            Reporter.log("=======================", true);
-            count++;
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-
         WebElement result = GooglePage.GetWebElement(GoogleTranslete.ResultTexBox());
         Helper.CheckSelector(result);
-
-        assert result != null;
         String s = "Привет Google";
-        s = s.toLowerCase().trim();
-        assertTrue(result.getText().toLowerCase().trim().startsWith(s), "Ждали: " + s + "Получили: " + result);
-
+        s = s.trim();
+        assertTrue(result.getText().trim().startsWith(s), "Ждали: " + s + " Получили: " + result.getText());
     }
 
     @Test

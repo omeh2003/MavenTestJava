@@ -1,5 +1,4 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
@@ -9,30 +8,24 @@ import static org.testng.Assert.fail;
 
 class GooglePage {
 
-    public static WebDriver driver = GetMyDrive();
-
-    private static WebDriver GetMyDrive() {
-        return GoogleTest.MyDrive;
-    }
-
     static void GoToSearchPage() {
 
-        driver.navigate().to("http://www.google.com/");
+        GoogleTest.MyDrive.navigate().to("http://www.google.com/");
         Helper.WaitForTitle("Google");
         if (GoogleTest.Promo) {
             GoogleTest.Promo = false;
             Helper.WaitForElement(By.linkText("×"), 5, false);
         }
         if (Helper.CheckSelector(By.linkText("×"))) {
-            Reporter.log("Кликаю елемент PROMO на главной ", true);
-            driver.findElement(By.linkText("×")).click();
+            Reporter.log("Кликаю элемент PROMO на главной ", true);
+            GoogleTest.MyDrive.findElement(By.linkText("×")).click();
             Reporter.log("=======================", true);
         }
 
     }
 
     static void Search(String searchLine, String expectedResult) {
-        String result = PageFactory.initElements(driver, SearchResultsPage.class).SearchFor(searchLine).getResults().get(0).getText();
+        String result = PageFactory.initElements(GoogleTest.MyDrive, SearchResultsPage.class).SearchFor(searchLine).getResults().get(0).getText();
 
         assertTrue(result.contains(expectedResult), "Ждали: " + expectedResult + ". Получили: " + result + ".");
     }
@@ -86,7 +79,7 @@ class GooglePage {
             Reporter.log("Name: " + button.Name, true);
             Reporter.log("SelectorElement: " + button.SelectorElement, true);
 
-            WebElement webElement = driver.findElement(by);
+            WebElement webElement = GoogleTest.MyDrive.findElement(by);
             Reporter.log(button.Name + " - isEnabled: " + webElement.isEnabled(), true);
             Reporter.log(button.Name + " -  getText: " + webElement.getText(), true);
             Reporter.log("=======================", true);
@@ -105,5 +98,14 @@ class GooglePage {
 
 
         return null;
+    }
+
+    public static void GoToTranslatePage() {
+        GoToSearchPage();
+        CheckGoogleButton(GoogleButton.ButtonProgram());
+        GetWebElement(GoogleButton.ButtonProgram()).click();
+        CheckGoogleButton(GoogleButton.ButtonTranslate());
+        GetWebElement(GoogleButton.ButtonTranslate()).click();
+        Helper.WaitForTitle("Google Переводчик");
     }
 }

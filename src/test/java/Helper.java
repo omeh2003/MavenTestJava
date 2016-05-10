@@ -12,6 +12,7 @@ import static org.testng.Assert.fail;
  * Created by Ivan on 10.05.2016.
  */
 public class Helper {
+
     static void WaitForElement(By by) {
         WaitForElement(by, 10);
     }
@@ -20,14 +21,16 @@ public class Helper {
         WaitForElement(by, seconds, true);
     }
 
-    static void WaitForElement(By by, int seconds, boolean fails) {
+    static void WaitForElement(By by, int seconds, boolean stopfail) {
         try {
-            new WebDriverWait(GooglePage.driver, seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
+            new WebDriverWait(GoogleTest.MyDrive, seconds).until(ExpectedConditions.visibilityOfElementLocated(by));
         } catch (Exception e) {
-            if (fails) {
+            if (stopfail) {
                 fail("WebDriverWait не дождался елемента: " + by.toString() + " " + "Ошибка: " + e.getMessage());
             } else {
-                Reporter.log("WebDriverWait не дождался елемента: " + by.toString() + " " + "Ошибка: " + e.getMessage());
+                Reporter.log("WebDriverWait не дождался элемента: " + by.toString() + " " + "Ошибка: " + e.getMessage());
+                Reporter.log("Продолжаю работу.");
+                Reporter.log("===========================================");
             }
         }
     }
@@ -38,7 +41,7 @@ public class Helper {
 
     static void WaitForTitle(String title, int seconds) {
         try {
-            new WebDriverWait(GooglePage.driver, seconds).until(ExpectedConditions.titleIs(title));
+            new WebDriverWait(GoogleTest.MyDrive, seconds).until(ExpectedConditions.titleIs(title));
         } catch (Exception e) {
             fail("WebDriverWait не дождался Title: " + title + " " + "Ошибка: " + e.getLocalizedMessage());
         }
@@ -47,8 +50,9 @@ public class Helper {
     static boolean CheckSelector(By selector) {
         try {
             Reporter.log("Проверка селектора: " + selector.toString(), true);
+
             //ReportObject(selector);
-            WebElement w = GooglePage.driver.findElement(selector);
+            WebElement w = GoogleTest.MyDrive.findElement(selector);
             Reporter.log("Проверка селектора WebElement: " + w.toString(), true);
             //ReportObject(w);
             Reporter.log("=======================", true);
@@ -57,7 +61,9 @@ public class Helper {
         } catch (Exception e) {
 
             Reporter.log("Селектор ненайден. " + e.getMessage(), true);
-            Reporter.log("селектор: " + selector.toString(), true);
+            Reporter.log("Cелектор: " + selector.toString(), true);
+            Reporter.log("Title страницы: " + GoogleTest.MyDrive.getTitle());
+            Reporter.log("Url страницы: " + GoogleTest.MyDrive.getCurrentUrl());
             Reporter.log("=======================", true);
         }
 
