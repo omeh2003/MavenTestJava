@@ -60,6 +60,26 @@ public class GoogleButton {
         return new GoogleButton(Selector.ID, "gb51", "Кнопка \"Переводчик\"");
     }
 
+    // Кнопка "Мой аккаунт"
+    public static GoogleButton ButtonMyAccount() {
+        return new GoogleButton(Selector.ID, "gb192", "Кнопка \"Мой аккаунт\"");
+    }
+
+    // Кнопка "Поиск"
+    public static GoogleButton ButtonSearch() {
+        return new GoogleButton(Selector.ID, "gb1", "Кнопка \"Поиск\"");
+    }
+
+    // Кнопка "Карты"
+    public static GoogleButton ButtonMap() {
+        return new GoogleButton(Selector.ID, "gb8", "Кнопка \"Карты\"");
+    }
+
+    // Кнопка "Новости"
+    public static GoogleButton ButtonNews() {
+        return new GoogleButton(Selector.ID, "gb5", "Кнопка \"Новости\"");
+    }
+
     // Кнопка "YouTube"
     public static GoogleButton ButtonYouTube() {
         return new GoogleButton(Selector.ID, "gb36", "Кнопка \"YouTube\"");
@@ -90,6 +110,18 @@ public class GoogleButton {
     public WebElement ToWebElement() {
         return GoogleTest.MyDrive.findElement(this.ToBy());
     }
+
+    public boolean WaitAndCheck() {
+
+        if (!Helper.CheckSelector(this.ToBy())) Helper.WaitForElement(this.ToBy(), 5, false);
+
+        return Helper.CheckSelector(this.ToBy());
+    }
+
+    public void Click() {
+        this.ToWebElement().click();
+    }
+
 
 
     public enum Selector {CSS, ID, XPATH, NAME, CLASS}

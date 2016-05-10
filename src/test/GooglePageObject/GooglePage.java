@@ -11,7 +11,7 @@ class GooglePage {
     static void GoToSearchPage() {
 
         GoogleTest.MyDrive.navigate().to("http://www.google.com/");
-        Helper.WaitForTitle("Google");
+        Helper.WaitForTitle("Google", 50);
         if (GoogleTest.Promo) {
             GoogleTest.Promo = false;
             Helper.WaitForElement(By.linkText("×"), 5, false);

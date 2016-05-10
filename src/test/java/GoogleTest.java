@@ -3,8 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -17,7 +17,7 @@ public class GoogleTest {
     static boolean Promo;
 
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
 
         Promo = true;
@@ -26,7 +26,7 @@ public class GoogleTest {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
 
         if (!Promo) Promo = true;
@@ -47,6 +47,17 @@ public class GoogleTest {
         GooglePage.GoToSearchPage();
         GooglePage.Search(searcher, result);
     }
+
+    @Test(dataProvider = "buttonMenu")
+    // Проверка работы кнопок в меню на главной странице
+    public void checkButtonInMainMenu(GoogleButton button, String title) {
+        GooglePage.GoToSearchPage();
+        if (GoogleButton.ButtonProgram().WaitAndCheck()) GoogleButton.ButtonProgram().Click();
+        if (button.WaitAndCheck()) button.Click();
+        Helper.WaitForTitle(title);
+        assertTrue(MyDrive.getTitle().equals(title));
+    }
+
 
     @Test
     // Проверка наличия кнопки "Поиск в Google" на главной странице
@@ -80,10 +91,8 @@ public class GoogleTest {
     // Проверка доступности GooglePlay с Главной страницы
     public void checkGooglePlay() {
         GooglePage.GoToSearchPage();
-        Helper.WaitAndCheckSelector(GoogleButton.ButtonProgram().ToBy(), 5, true);
-        GoogleButton.ButtonProgram().ToWebElement().click();
-        Helper.WaitAndCheckSelector(GoogleButton.ButtonGooglePlay().ToBy(), 5, true);
-        GoogleButton.ButtonGooglePlay().ToWebElement().click();
+        if (GoogleButton.ButtonProgram().WaitAndCheck()) GoogleButton.ButtonProgram().Click();
+        if (GoogleButton.ButtonGooglePlay().WaitAndCheck()) GoogleButton.ButtonGooglePlay().Click();
         Helper.WaitForTitle("Google Play");
         assertTrue(MyDrive.getTitle().equals("Google Play"));
     }
@@ -94,8 +103,7 @@ public class GoogleTest {
         GooglePage.GoToTranslatePage();
         GooglePage.CheckGoogleButton(GoogleTranslete.SourceTexBox());
         GooglePage.GetWebElement(GoogleTranslete.SourceTexBox()).sendKeys("Hi Google");
-        GooglePage.CheckGoogleButton(GoogleTranslete.ButtonTranslete());
-        GooglePage.GetWebElement(GoogleTranslete.ButtonTranslete()).click();
+        if (GoogleTranslete.ButtonTranslete().WaitAndCheck()) GoogleTranslete.ButtonTranslete().Click();
         GooglePage.CheckGoogleButton(GoogleTranslete.ResultTexBox());
         WebElement result = GooglePage.GetWebElement(GoogleTranslete.ResultTexBox());
         Helper.CheckSelector(result);
@@ -135,6 +143,17 @@ public class GoogleTest {
                 {"Есть ли жизнь на Марсе", "Есть ли жизнь на марсе"},
                 {"Бочка рома", "Бочка рома"},
                 {"GTA5", "GTA5"}
+        };
+    }
+
+
+    @DataProvider(name = "buttonMenu")
+    public Object[][] buttonMenu() {
+        return new Object[][]{
+                {GoogleButton.ButtonMap(), "Google Карты"},
+                {GoogleButton.ButtonMyAccount(), "Настройки аккаунта Google"},
+                {GoogleButton.ButtonNews(), "Новости Google"},
+                {GoogleButton.ButtonSearch(), "Google"}
         };
     }
 }
