@@ -48,39 +48,8 @@ public class Helper {
     }
 
     static boolean CheckSelector(By selector) {
-        try {
-            Reporter.log("Проверка селектора: " + selector.toString(), true);
 
-            //ReportObject(selector);
-            WebElement w = GoogleTest.MyDrive.findElement(selector);
-            Reporter.log("Проверка селектора WebElement: " + w.toString(), true);
-            //ReportObject(w);
-            Reporter.log("=======================", true);
-            return w.isEnabled();
-
-        } catch (Exception e) {
-
-            Reporter.log("Селектор ненайден. " + e.getMessage(), true);
-            Reporter.log("Cелектор: " + selector.toString(), true);
-            Reporter.log("Title страницы: " + GoogleTest.MyDrive.getTitle());
-            Reporter.log("Url страницы: " + GoogleTest.MyDrive.getCurrentUrl());
-            Reporter.log("=======================", true);
-        }
-
-
-        return false;
-    }
-
-    private static void ReportObject(Object obj) {
-        for (Field x : obj.getClass().getDeclaredFields()
-                ) {
-            Reporter.log("Field name: " + x.getName(), true);
-            for (Field y :
-                    x.getClass().getDeclaredFields()) {
-                Reporter.log("Field value: " + y.toString(), true);
-            }
-
-        }
+        return CheckSelector(GoogleTest.MyDrive.findElement(selector));
     }
 
     static boolean CheckSelector(WebElement selector) {
@@ -107,5 +76,21 @@ public class Helper {
 
         return false;
 
+    }
+
+    static void WaitAndCheckSelector(By by, int seconds, boolean stopfail) {
+        if (!CheckSelector(by)) WaitForElement(by, seconds, stopfail);
+    }
+
+    private static void ReportObject(Object obj) {
+        for (Field x : obj.getClass().getDeclaredFields()
+                ) {
+            Reporter.log("Field name: " + x.getName(), true);
+            for (Field y :
+                    x.getClass().getDeclaredFields()) {
+                Reporter.log("Field value: " + y.toString(), true);
+            }
+
+        }
     }
 }

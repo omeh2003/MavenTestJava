@@ -31,26 +31,7 @@ class GooglePage {
     }
 
     static void CheckGoogleButton(GoogleButton button) {
-        By by = null;
-        switch (button.SelectorElement) {
-            case CSS:
-                by = By.cssSelector(button.Name);
-                break;
-            case ID:
-                by = By.id(button.Name);
-                break;
-            case XPATH:
-                by = By.xpath(button.Name);
-                break;
-            case NAME:
-                by = By.name(button.Name);
-                break;
-            case CLASS:
-                by = By.className(button.Name);
-                break;
-        }
-
-        Helper.CheckSelector(by);
+        Helper.CheckSelector(button.ToBy());
     }
 
 

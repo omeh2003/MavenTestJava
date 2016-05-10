@@ -1,3 +1,5 @@
+import org.openqa.selenium.By;
+
 /**
  * Created  on 07.05.2016.
  */
@@ -32,7 +34,6 @@ public class GoogleButton {
         return new GoogleButton(Selector.CLASS, "gb_P", "Почта");
     }
 
-
     // Поле ввода поискового запроса
     public static GoogleButton StringSearch() {
         return new GoogleButton(Selector.ID, "lst-ib", "Поле ввода поискового запроса");
@@ -42,7 +43,6 @@ public class GoogleButton {
     public static GoogleButton ButtonOk() {
         return new GoogleButton(Selector.ID, "sblsbb", "Кнопка \"Поиск\"");
     }
-
 
     // Кнопка "GooglePlay"
     public static GoogleButton ButtonGooglePlay() {
@@ -62,6 +62,28 @@ public class GoogleButton {
     // Кнопка "YouTube"
     public static GoogleButton ButtonYouTube() {
         return new GoogleButton(Selector.ID, "gb36", "Кнопка \"YouTube\"");
+    }
+
+    public By ToBy() {
+        By by = null;
+        switch (this.SelectorElement) {
+            case CSS:
+                by = By.cssSelector(this.Name);
+                break;
+            case ID:
+                by = By.id(this.Name);
+                break;
+            case XPATH:
+                by = By.xpath(this.Name);
+                break;
+            case NAME:
+                by = By.name(this.Name);
+                break;
+            case CLASS:
+                by = By.className(this.Name);
+                break;
+        }
+        return by;
     }
 
 
