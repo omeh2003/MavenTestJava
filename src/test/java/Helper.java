@@ -49,7 +49,29 @@ public class Helper {
 
     static boolean CheckSelector(By selector) {
 
-        return CheckSelector(GoogleTest.MyDrive.findElement(selector));
+        try {
+
+            WebElement webElement = GoogleTest.MyDrive.findElement(selector);
+            Reporter.log("Проверка селектора toString: " + webElement.toString(), true);
+            Reporter.log("Проверка селектора getTagName: " + webElement.getTagName(), true);
+            Reporter.log("Проверка селектора getText: " + webElement.getText(), true);
+            Reporter.log("isEnabled: " + webElement.isEnabled(), true);
+
+            Reporter.log("=======================", true);
+
+            return webElement.isEnabled();
+
+        } catch (Exception e) {
+
+            Reporter.log("Селектор ненайден. " + e.getMessage(), true);
+            Reporter.log("селектор: " + selector.toString(), true);
+            Reporter.log("=======================", true);
+        }
+
+
+        return false;
+
+
     }
 
     static boolean CheckSelector(WebElement selector) {
