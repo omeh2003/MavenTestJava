@@ -84,7 +84,7 @@ public class GoogleTest {
         GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonGooglePlay());
         GooglePage.GetWebElement(GoogleButton.ButtonGooglePlay()).click();
-        GooglePage.WaitForElement(By.cssSelector("span.gb_Rb"), 5, false);
+        Helper.WaitForElement(By.cssSelector("span.gb_Rb"), 5, false);
         assertTrue(MyDrive.getTitle().equals("Google Play"));
 
 
@@ -98,7 +98,7 @@ public class GoogleTest {
         GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonTranslate());
         GooglePage.GetWebElement(GoogleButton.ButtonTranslate()).click();
-        GooglePage.WaitForElement(By.id("gbq1"));
+        Helper.WaitForElement(By.id("gbq1"));
         assertTrue(MyDrive.getTitle().equals("Google Переводчик"));
         GooglePage.CheckGoogleButton(GoogleTranslete.SourceTexBox());
         GooglePage.GetWebElement(GoogleTranslete.SourceTexBox()).sendKeys("Hi Google");
@@ -121,7 +121,7 @@ public class GoogleTest {
         }
 
         WebElement result = GooglePage.GetWebElement(GoogleTranslete.ResultTexBox());
-        GooglePage.CheckSelector(result);
+        Helper.CheckSelector(result);
 
         assert result != null;
         String s = "Привет Google";
@@ -138,14 +138,14 @@ public class GoogleTest {
         GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
         GooglePage.CheckGoogleButton(GoogleButton.ButtonYouTube());
         GooglePage.GetWebElement(GoogleButton.ButtonYouTube()).click();
-        GooglePage.WaitForElement(By.id("logo-container"));
+        Helper.WaitForElement(By.id("logo-container"));
         assertTrue(MyDrive.getTitle().equals("YouTube"));
         GooglePage.CheckGoogleButton(GoogleYouTube.ButtonSearchYouTube());
         GooglePage.GetWebElement(GoogleYouTube.ButtonSearchYouTube()).sendKeys("Смешные котики");
         GooglePage.CheckGoogleButton(GoogleYouTube.ButtonSearchYouTubeOK());
         GooglePage.GetWebElement(GoogleYouTube.ButtonSearchYouTubeOK()).click();
-        GooglePage.WaitForElement(By.className("yt-lockup-title"));
-        GooglePage.CheckSelector(By.className("yt-lockup-title"));
+        Helper.WaitForElement(By.className("yt-lockup-title"));
+        Helper.CheckSelector(By.className("yt-lockup-title"));
         String result = GoogleYouTube.GetResult().get(0).getText();
         Reporter.log("Первый результат: " + result, true);
         Reporter.log("=======================", true);

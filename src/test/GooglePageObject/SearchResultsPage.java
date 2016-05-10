@@ -24,7 +24,7 @@ public class SearchResultsPage {
         GooglePage.GetWebElement(GoogleButton.StringSearch()).sendKeys(text);
         GooglePage.CheckGoogleButton(GoogleButton.ButtonOk());
         GooglePage.GetWebElement(GoogleButton.ButtonOk()).click();
-        GooglePage.WaitForElement(By.cssSelector("#ires .g"));
+        Helper.WaitForElement(By.cssSelector("#ires .g"));
         return PageFactory.initElements(GoogleTest.MyDrive, SearchResultsPage.class);
     }
 
