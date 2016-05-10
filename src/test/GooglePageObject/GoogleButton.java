@@ -122,8 +122,6 @@ public class GoogleButton {
         this.ToWebElement().click();
     }
 
-
-
     public enum Selector {CSS, ID, XPATH, NAME, CLASS}
 
 
