@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created  on 07.05.2016.
@@ -84,6 +85,10 @@ public class GoogleButton {
                 break;
         }
         return by;
+    }
+
+    public WebElement ToWebElement() {
+        return GoogleTest.MyDrive.findElement(this.ToBy());
     }
 
 

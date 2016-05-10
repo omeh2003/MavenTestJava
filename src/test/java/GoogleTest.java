@@ -80,14 +80,12 @@ public class GoogleTest {
     // Проверка доступности GooglePlay с Главной страницы
     public void checkGooglePlay() {
         GooglePage.GoToSearchPage();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonProgram());
-        GooglePage.GetWebElement(GoogleButton.ButtonProgram()).click();
-        GooglePage.CheckGoogleButton(GoogleButton.ButtonGooglePlay());
-        GooglePage.GetWebElement(GoogleButton.ButtonGooglePlay()).click();
-        Helper.WaitForElement(By.cssSelector("span.gb_Rb"), 5, false);
+        Helper.WaitAndCheckSelector(GoogleButton.ButtonProgram().ToBy(), 5, true);
+        GoogleButton.ButtonProgram().ToWebElement().click();
+        Helper.WaitAndCheckSelector(GoogleButton.ButtonGooglePlay().ToBy(), 5, true);
+        GoogleButton.ButtonGooglePlay().ToWebElement().click();
+        Helper.WaitForTitle("Google Play");
         assertTrue(MyDrive.getTitle().equals("Google Play"));
-
-
     }
 
     @Test
